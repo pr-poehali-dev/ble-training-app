@@ -7,6 +7,7 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+			"./1780400096275648628.html"
 	],
 	prefix: "",
 	theme: {
@@ -16,6 +17,11 @@ export default {
 			screens: {
 				'2xl': '1400px'
 			}
+		},
+		fontFamily: {
+			oswald: ['Oswald', 'sans-serif'],
+			roboto: ['Roboto', 'sans-serif'],
+			mono: ['Roboto Mono', 'monospace'],
 		},
 		extend: {
 			colors: {
@@ -88,7 +94,11 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.4s ease forwards',
+				'slide-up': 'slide-up 0.3s ease forwards',
+				'spin-slow': 'spin-slow 3s linear infinite',
+				'blink': 'blink 1.2s ease-in-out infinite',
 			}
 		}
 	},
