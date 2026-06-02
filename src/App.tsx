@@ -27,11 +27,11 @@ interface TrainingSession {
 }
 
 const MODES = [
-  { id: 'sequential', name: 'Последовательный', icon: 'AlignJustify', desc: 'Мишени открываются по очереди слева направо', color: '#22c55e', bg: 'rgba(34,197,94,0.08)', difficulty: 'Легко' },
-  { id: 'random', name: 'Случайный', icon: 'Shuffle', desc: 'Мишени открываются в случайном порядке и времени', color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', difficulty: 'Средне' },
+  { id: 'sequential', name: 'Последовательный', icon: 'AlignJustify', desc: 'Мишени открываются по очереди слева направо', color: '#00c8ff', bg: 'rgba(0,200,255,0.07)', difficulty: 'Легко' },
+  { id: 'random', name: 'Случайный', icon: 'Shuffle', desc: 'Мишени открываются в случайном порядке и времени', color: '#ff6b1a', bg: 'rgba(255,107,26,0.08)', difficulty: 'Средне' },
   { id: 'reaction', name: 'Реакция', icon: 'Zap', desc: 'Одна мишень на 1.5 сек — максимальная скорость реакции', color: '#ef4444', bg: 'rgba(239,68,68,0.08)', difficulty: 'Сложно' },
-  { id: 'sniper', name: 'Снайпер', icon: 'Crosshair', desc: 'Точность важнее скорости. Долгие паузы между мишенями', color: '#818cf8', bg: 'rgba(129,140,248,0.08)', difficulty: 'Средне' },
-  { id: 'endurance', name: 'Выносливость', icon: 'Timer', desc: 'Все мишени открыты — 5 минут непрерывной работы', color: '#06b6d4', bg: 'rgba(6,182,212,0.08)', difficulty: 'Тяжело' },
+  { id: 'sniper', name: 'Снайпер', icon: 'Crosshair', desc: 'Точность важнее скорости. Долгие паузы между мишенями', color: '#00c8ff', bg: 'rgba(0,200,255,0.07)', difficulty: 'Средне' },
+  { id: 'endurance', name: 'Выносливость', icon: 'Timer', desc: 'Все мишени открыты — 5 минут непрерывной работы', color: '#ff6b1a', bg: 'rgba(255,107,26,0.08)', difficulty: 'Тяжело' },
 ];
 
 const MOCK_HISTORY: TrainingSession[] = [
@@ -47,14 +47,14 @@ function SignalBars({ rssi }: { rssi: number }) {
   return (
     <div className="flex items-end gap-0.5" style={{ height: 16 }}>
       {[1, 2, 3, 4].map(b => (
-        <div key={b} style={{ width: 4, height: 4 + b * 3, borderRadius: 1, background: b <= strength ? '#22c55e' : 'rgba(255,255,255,0.15)' }} />
+        <div key={b} style={{ width: 4, height: 4 + b * 3, borderRadius: 1, background: b <= strength ? '#00c8ff' : 'rgba(255,255,255,0.15)' }} />
       ))}
     </div>
   );
 }
 
 function BatteryWidget({ level }: { level: number }) {
-  const color = level > 50 ? '#22c55e' : level > 20 ? '#f59e0b' : '#ef4444';
+  const color = level > 50 ? '#00c8ff' : level > 20 ? '#ff6b1a' : '#ef4444';
   return (
     <div className="flex items-center gap-1.5">
       <div style={{ width: 24, height: 12, borderRadius: 2, border: `1.5px solid ${color}`, position: 'relative', display: 'flex', alignItems: 'center', padding: '1px' }}>
@@ -75,7 +75,7 @@ function TargetCircle({ target, onTap }: { target: Target; onTap: () => void }) 
         {[size * 0.85, size * 0.6, size * 0.35].map((r, i) => (
           <div key={i} style={{ position: 'absolute', width: r, height: r, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.06)', pointerEvents: 'none' }} />
         ))}
-        <span style={{ fontFamily: 'Oswald', fontSize: 20, fontWeight: 700, color: target.status === 'hit' ? '#1c1917' : target.status === 'open' ? '#bbf7d0' : '#fca5a5', position: 'relative', zIndex: 2 }}>
+        <span style={{ fontFamily: 'Oswald', fontSize: 20, fontWeight: 700, color: target.status === 'hit' ? '#1c1917' : target.status === 'open' ? '#a5f3ff' : '#fca5a5', position: 'relative', zIndex: 2 }}>
           {target.id}
         </span>
       </div>
@@ -88,7 +88,7 @@ function TargetCircle({ target, onTap }: { target: Target; onTap: () => void }) 
   );
 }
 
-function MiniChart({ data, color = '#22c55e' }: { data: number[]; color?: string }) {
+function MiniChart({ data, color = '#00c8ff' }: { data: number[]; color?: string }) {
   const max = Math.max(...data, 1);
   const w = 260, h = 70;
   const pts = data.map((v, i) => `${(i / (data.length - 1)) * w},${h - (v / max) * (h - 8) - 4}`).join(' ');
@@ -198,8 +198,8 @@ export default function App() {
         <div className="animate-fade-in" style={{ padding: '48px 20px 24px' }}>
           <div style={{ marginBottom: 32 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 2 }}>
-              <div style={{ width: 3, height: 28, background: '#22c55e', borderRadius: 2 }} />
-              <h1 className="screen-header" style={{ color: '#22c55e', margin: 0 }}>TactShoot</h1>
+              <div style={{ width: 3, height: 28, background: '#00c8ff', borderRadius: 2 }} />
+              <h1 className="screen-header" style={{ color: '#00c8ff', margin: 0 }}>TactShoot</h1>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, letterSpacing: '0.1em', paddingLeft: 13 }}>BLUETOOTH ПОДКЛЮЧЕНИЕ · BLE FFE0</p>
           </div>
@@ -209,15 +209,15 @@ export default function App() {
               {scanning && [0, 0.6, 1.2].map(delay => (
                 <div key={delay} className="scan-ring" style={{ width: 40, height: 40, animationDelay: `${delay}s` }} />
               ))}
-              <div style={{ width: 64, height: 64, borderRadius: '50%', background: connected ? 'rgba(34,197,94,0.12)' : 'rgba(255,255,255,0.04)', border: `2px solid ${connected ? '#22c55e' : 'rgba(255,255,255,0.12)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: connected ? '0 0 24px rgba(34,197,94,0.35)' : 'none', transition: 'all 0.4s ease' }}>
-                <Icon name="Bluetooth" size={28} style={{ color: connected ? '#22c55e' : 'rgba(255,255,255,0.35)' }} />
+              <div style={{ width: 64, height: 64, borderRadius: '50%', background: connected ? 'rgba(0,200,255,0.12)' : 'rgba(255,255,255,0.04)', border: `2px solid ${connected ? '#00c8ff' : 'rgba(255,255,255,0.12)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: connected ? '0 0 24px rgba(0,200,255,0.35)' : 'none', transition: 'all 0.4s ease' }}>
+                <Icon name="Bluetooth" size={28} style={{ color: connected ? '#00c8ff' : 'rgba(255,255,255,0.35)' }} />
               </div>
             </div>
           </div>
 
           {connected && connectedDevice && (
             <div className="glass-panel animate-slide-up" style={{ padding: '13px 16px', borderRadius: 10, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px #22c55e', flexShrink: 0 }} />
+              <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#00c8ff', boxShadow: '0 0 8px #22c55e', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontFamily: 'Oswald', fontSize: 14, fontWeight: 600, color: '#fff' }}>{connectedDevice.name}</div>
                 <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>Подключено · RSSI {connectedDevice.rssi} dBm</div>
@@ -233,8 +233,8 @@ export default function App() {
               </div>
               {devices.map((d, i) => (
                 <button key={d.id} className="device-item" onClick={() => connectDevice(d)} style={{ width: '100%', marginBottom: i < devices.length - 1 ? 8 : 0 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(34,197,94,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Icon name="Crosshair" size={18} style={{ color: '#22c55e' }} />
+                  <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(0,200,255,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Icon name="Crosshair" size={18} style={{ color: '#00c8ff' }} />
                   </div>
                   <div style={{ flex: 1, textAlign: 'left' }}>
                     <div style={{ fontFamily: 'Oswald', fontSize: 15, color: '#fff', fontWeight: 500 }}>{d.name}</div>
@@ -257,7 +257,7 @@ export default function App() {
             onClick={connected ? () => setScreen('mode') : startScan}
             disabled={scanning}
             className="neon-btn"
-            style={{ width: '100%', padding: '14px', borderRadius: 10, background: scanning ? 'rgba(34,197,94,0.08)' : 'rgba(34,197,94,0.9)', color: scanning ? '#22c55e' : '#0a0f14', border: '1px solid rgba(34,197,94,0.4)', fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+            style={{ width: '100%', padding: '14px', borderRadius: 10, background: scanning ? 'rgba(0,200,255,0.07)' : 'rgba(0,200,255,0.9)', color: scanning ? '#00c8ff' : '#000', border: '1px solid rgba(0,200,255,0.4)', fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
           >
             {scanning ? <><Icon name="Loader2" size={18} style={{ animation: 'spin-slow 1s linear infinite' }} />Сканирование...</> : connected ? <><Icon name="Play" size={18} />Продолжить</> : <><Icon name="Search" size={18} />Сканировать</>}
           </button>
@@ -272,7 +272,7 @@ export default function App() {
               <Icon name="ChevronLeft" size={18} /><span style={{ fontSize: 12 }}>Назад</span>
             </button>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 2 }}>
-              <div style={{ width: 3, height: 28, background: '#f59e0b', borderRadius: 2 }} />
+              <div style={{ width: 3, height: 28, background: '#ff6b1a', borderRadius: 2 }} />
               <h1 className="screen-header" style={{ color: '#fff', margin: 0 }}>Режим тренировки</h1>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, paddingLeft: 13 }}>Выберите режим и нажмите «Начать»</p>
@@ -298,7 +298,7 @@ export default function App() {
             ))}
           </div>
 
-          <button onClick={startTraining} disabled={!selectedMode} className="neon-btn" style={{ width: '100%', marginTop: 18, padding: '14px', borderRadius: 10, background: selectedMode ? 'rgba(34,197,94,0.9)' : 'rgba(255,255,255,0.04)', color: selectedMode ? '#0a0f14' : 'rgba(255,255,255,0.2)', border: `1px solid ${selectedMode ? 'rgba(34,197,94,0.4)' : 'rgba(255,255,255,0.08)'}`, fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, cursor: selectedMode ? 'pointer' : 'default', transition: 'all 0.2s' }}>
+          <button onClick={startTraining} disabled={!selectedMode} className="neon-btn" style={{ width: '100%', marginTop: 18, padding: '14px', borderRadius: 10, background: selectedMode ? 'rgba(0,200,255,0.9)' : 'rgba(255,255,255,0.04)', color: selectedMode ? '#000' : 'rgba(255,255,255,0.2)', border: `1px solid ${selectedMode ? 'rgba(0,200,255,0.4)' : 'rgba(255,255,255,0.08)'}`, fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, cursor: selectedMode ? 'pointer' : 'default', transition: 'all 0.2s' }}>
             <Icon name="Play" size={18} />Начать тренировку
           </button>
         </div>
@@ -312,11 +312,11 @@ export default function App() {
               <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 2 }}>
                 {MODES.find(m => m.id === selectedMode)?.name || 'Тренировка'}
               </div>
-              <div style={{ fontFamily: 'Roboto Mono', fontSize: 30, color: trainingActive ? '#22c55e' : 'rgba(255,255,255,0.4)', fontWeight: 500, lineHeight: 1 }}>{fmt(elapsed)}</div>
+              <div style={{ fontFamily: 'Roboto Mono', fontSize: 30, color: trainingActive ? '#00c8ff' : 'rgba(255,255,255,0.4)', fontWeight: 500, lineHeight: 1 }}>{fmt(elapsed)}</div>
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 2 }}>Очки</div>
-              <div style={{ fontFamily: 'Roboto Mono', fontSize: 30, color: '#f59e0b', fontWeight: 500, lineHeight: 1 }}>{score}</div>
+              <div style={{ fontFamily: 'Roboto Mono', fontSize: 30, color: '#ff6b1a', fontWeight: 500, lineHeight: 1 }}>{score}</div>
             </div>
             <BatteryWidget level={battery} />
           </div>
@@ -339,9 +339,9 @@ export default function App() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9, marginBottom: 10 }}>
             {[
-              { label: 'Открыть все', cmd: '0x10', onClick: openAll, color: '#22c55e', icon: 'Eye' },
+              { label: 'Открыть все', cmd: '0x10', onClick: openAll, color: '#00c8ff', icon: 'Eye' },
               { label: 'Закрыть все', cmd: '0x11', onClick: closeAll, color: '#ef4444', icon: 'EyeOff' },
-              { label: 'Случайный', cmd: '0x14', onClick: randomMode, color: '#f59e0b', icon: 'Shuffle' },
+              { label: 'Случайный', cmd: '0x14', onClick: randomMode, color: '#ff6b1a', icon: 'Shuffle' },
               { label: 'Стоп', cmd: '0x15', onClick: stopTraining, color: trainingActive ? '#ef4444' : 'rgba(255,255,255,0.25)', icon: 'Square' },
             ].map(btn => (
               <button key={btn.cmd} onClick={btn.onClick} className="neon-btn" style={{ padding: '11px', borderRadius: 9, background: `${btn.color}12`, color: btn.color, border: `1px solid ${btn.color}30`, fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
@@ -356,7 +356,7 @@ export default function App() {
             </div>
             <div style={{ display: 'flex', gap: 7 }}>
               {targets.map(t => (
-                <button key={t.id} onClick={() => simulateHit(t.id)} style={{ flex: 1, padding: '8px 0', borderRadius: 7, background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)', color: '#f59e0b', fontSize: 14, fontFamily: 'Oswald', fontWeight: 600, cursor: 'pointer' }}>
+                <button key={t.id} onClick={() => simulateHit(t.id)} style={{ flex: 1, padding: '8px 0', borderRadius: 7, background: 'rgba(255,107,26,0.08)', border: '1px solid rgba(255,107,26,0.2)', color: '#ff6b1a', fontSize: 14, fontFamily: 'Oswald', fontWeight: 600, cursor: 'pointer' }}>
                   {t.id}
                 </button>
               ))}
@@ -422,7 +422,7 @@ export default function App() {
             <button className="neon-btn" style={{ padding: '12px', borderRadius: 9, background: 'rgba(129,140,248,0.1)', color: '#818cf8', border: '1px solid rgba(129,140,248,0.25)', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
               <Icon name="Send" size={15} />Применить (0x20)
             </button>
-            <button onClick={() => setCalStep(s => Math.min(4, s + 1))} className="neon-btn" style={{ padding: '12px', borderRadius: 9, background: 'rgba(34,197,94,0.1)', color: '#22c55e', border: '1px solid rgba(34,197,94,0.25)', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            <button onClick={() => setCalStep(s => Math.min(4, s + 1))} className="neon-btn" style={{ padding: '12px', borderRadius: 9, background: 'rgba(0,200,255,0.1)', color: '#00c8ff', border: '1px solid rgba(0,200,255,0.25)', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
               {calStep < 4 ? 'Следующая' : 'Готово'}<Icon name="ChevronRight" size={15} />
             </button>
           </div>
@@ -452,7 +452,7 @@ export default function App() {
 
           <div className="glass-panel" style={{ padding: 16, borderRadius: 12, marginBottom: 12 }}>
             <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', marginBottom: 12, textTransform: 'uppercase' }}>Попадания по тренировкам</div>
-            <MiniChart data={hitsData} color="#22c55e" />
+            <MiniChart data={hitsData} color="#00c8ff" />
           </div>
 
           <div className="glass-panel" style={{ padding: 16, borderRadius: 12, marginBottom: 16 }}>
@@ -472,7 +472,7 @@ export default function App() {
                   <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>{s.date} · {Math.floor(s.duration / 60)}:{String(s.duration % 60).padStart(2, '0')} мин</div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontFamily: 'Roboto Mono', fontSize: 16, color: '#22c55e' }}>{s.hits}</div>
+                  <div style={{ fontFamily: 'Roboto Mono', fontSize: 16, color: '#00c8ff' }}>{s.hits}</div>
                   <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>{s.accuracy}%</div>
                 </div>
               </div>
@@ -494,7 +494,7 @@ export default function App() {
           <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.12em', marginBottom: 10, textTransform: 'uppercase' }}>Устройство</div>
           <div className="glass-panel" style={{ padding: '14px 16px', borderRadius: 12, marginBottom: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, paddingBottom: 12, marginBottom: 12, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <div style={{ width: 9, height: 9, borderRadius: '50%', background: connected ? '#22c55e' : '#ef4444', boxShadow: connected ? '0 0 8px #22c55e' : 'none', flexShrink: 0 }} />
+              <div style={{ width: 9, height: 9, borderRadius: '50%', background: connected ? '#00c8ff' : '#ef4444', boxShadow: connected ? '0 0 8px #22c55e' : 'none', flexShrink: 0 }} />
               <span style={{ fontSize: 13, color: '#fff' }}>{connected ? connectedDevice?.name || 'Подключено' : 'Нет подключения'}</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
@@ -521,7 +521,7 @@ export default function App() {
                   <div style={{ fontSize: 13, color: '#fff', fontWeight: 500 }}>{item.label}</div>
                   <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', marginTop: 1 }}>{item.desc}</div>
                 </div>
-                <button onClick={item.toggle} style={{ width: 44, height: 24, borderRadius: 12, background: item.val ? '#22c55e' : 'rgba(255,255,255,0.08)', border: 'none', cursor: 'pointer', position: 'relative', transition: 'background 0.2s ease', flexShrink: 0 }}>
+                <button onClick={item.toggle} style={{ width: 44, height: 24, borderRadius: 12, background: item.val ? '#00c8ff' : 'rgba(255,255,255,0.08)', border: 'none', cursor: 'pointer', position: 'relative', transition: 'background 0.2s ease', flexShrink: 0 }}>
                   <div style={{ position: 'absolute', width: 18, height: 18, borderRadius: '50%', background: '#fff', top: 3, left: item.val ? 23 : 3, transition: 'left 0.2s ease', boxShadow: '0 1px 4px rgba(0,0,0,0.3)' }} />
                 </button>
               </div>
@@ -534,7 +534,7 @@ export default function App() {
               <BatteryWidget level={battery} />
             </div>
             <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${battery}%`, background: battery > 50 ? 'linear-gradient(90deg,#22c55e,#86efac)' : 'linear-gradient(90deg,#f59e0b,#fcd34d)' }} />
+              <div className="progress-fill" style={{ width: `${battery}%`, background: battery > 50 ? 'linear-gradient(90deg,#00c8ff,#7ee8fa)' : 'linear-gradient(90deg,#ff6b1a,#ffb347)' }} />
             </div>
           </div>
         </div>

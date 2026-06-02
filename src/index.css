@@ -4,52 +4,54 @@
 
 @layer base {
   :root {
-    --background: 220 20% 6%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 95%;
 
-    --card: 220 18% 9%;
+    --card: 0 0% 4%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 220 18% 9%;
+    --popover: 0 0% 4%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 142 76% 45%;
-    --primary-foreground: 220 20% 6%;
+    --primary: 197 100% 50%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 220 15% 15%;
+    --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 85%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 50%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 38 100% 50%;
-    --accent-foreground: 220 20% 6%;
+    --accent: 25 100% 55%;
+    --accent-foreground: 0 0% 0%;
 
     --destructive: 0 84% 55%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 220 15% 18%;
-    --input: 220 15% 18%;
-    --ring: 142 76% 45%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 197 100% 50%;
 
     --radius: 0.375rem;
 
     /* Custom vars */
-    --neon-green: #22c55e;
+    --neon-green: #00c8ff;
+    --neon-blue: #00c8ff;
+    --neon-orange: #ff6b1a;
     --neon-red: #ef4444;
-    --neon-yellow: #f59e0b;
-    --hit-flash: #fef08a;
-    --panel-bg: rgba(15, 20, 30, 0.85);
-    --grid-line: rgba(34, 197, 94, 0.08);
+    --neon-yellow: #ff6b1a;
+    --hit-flash: #ff6b1a;
+    --panel-bg: rgba(0, 0, 0, 0.82);
+    --grid-line: rgba(255, 255, 255, 0.07);
 
-    --sidebar-background: 220 18% 9%;
+    --sidebar-background: 0 0% 4%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 142 76% 45%;
-    --sidebar-primary-foreground: 220 20% 6%;
-    --sidebar-accent: 220 15% 15%;
+    --sidebar-primary: 197 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
     --sidebar-accent-foreground: 0 0% 85%;
-    --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 142 76% 45%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 197 100% 50%;
   }
 }
 
@@ -61,10 +63,25 @@
   body {
     @apply bg-background text-foreground;
     font-family: "Roboto", sans-serif;
+    background-color: #000;
     background-image:
-      linear-gradient(var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 40px 40px;
+      /* Центральная линия */
+      linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+      /* Вертикальные линии */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+      /* Редкая сетка (крупная) */
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size:
+      100% 50%,
+      50% 100%,
+      100px 100px,
+      100px 100px;
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0;
   }
 
   h1,
@@ -89,21 +106,21 @@
 
   .target-open {
     @apply relative flex items-center justify-center rounded-full;
-    background: radial-gradient(circle at 35% 35%, #14532d, #052e16);
+    background: radial-gradient(circle at 35% 35%, #003d4f, #001a22);
     box-shadow:
-      0 0 25px rgba(34, 197, 94, 0.5),
+      0 0 25px rgba(0, 200, 255, 0.55),
       inset 0 0 30px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(34, 197, 94, 0.6);
+    border: 2px solid rgba(0, 200, 255, 0.65);
     animation: target-pulse 2s ease-in-out infinite;
   }
 
   .target-hit {
     @apply relative flex items-center justify-center rounded-full;
-    background: radial-gradient(circle at 35% 35%, #fef08a, #fbbf24);
+    background: radial-gradient(circle at 35% 35%, #ff9f6a, #ff6b1a);
     box-shadow:
-      0 0 40px rgba(251, 191, 36, 0.9),
-      0 0 80px rgba(251, 191, 36, 0.4);
-    border: 2px solid #fef08a;
+      0 0 40px rgba(255, 107, 26, 0.95),
+      0 0 80px rgba(255, 107, 26, 0.45);
+    border: 2px solid #ff9f6a;
     animation: hit-flash 0.6s ease-out forwards;
   }
 
@@ -124,13 +141,13 @@
   .glass-panel {
     background: var(--panel-bg);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(0, 200, 255, 0.12);
   }
 
   .stat-value {
     font-family: "Roboto Mono", monospace;
     @apply text-2xl font-medium;
-    color: var(--neon-green);
+    color: var(--neon-blue);
   }
 
   .screen-header {
@@ -141,48 +158,48 @@
 
   .device-item {
     @apply flex items-center gap-3 p-3 rounded-lg cursor-pointer;
-    background: rgba(34, 197, 94, 0.05);
-    border: 1px solid rgba(34, 197, 94, 0.2);
+    background: rgba(0, 200, 255, 0.04);
+    border: 1px solid rgba(0, 200, 255, 0.18);
     transition: all 0.2s ease;
   }
 
   .device-item:hover {
-    background: rgba(34, 197, 94, 0.12);
-    border-color: rgba(34, 197, 94, 0.5);
+    background: rgba(0, 200, 255, 0.1);
+    border-color: rgba(0, 200, 255, 0.45);
     transform: translateX(3px);
   }
 
   .mode-card {
     @apply relative p-5 rounded-xl cursor-pointer overflow-hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.25s ease;
   }
 
   .mode-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(34, 197, 94, 0.5);
+    border-color: rgba(0, 200, 255, 0.45);
     box-shadow:
-      0 8px 30px rgba(0, 0, 0, 0.4),
-      0 0 20px rgba(34, 197, 94, 0.15);
+      0 8px 30px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(0, 200, 255, 0.12);
   }
 
   .mode-card.selected {
-    border-color: var(--neon-green);
-    box-shadow: 0 0 25px rgba(34, 197, 94, 0.25);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.2);
   }
 
   .scan-ring {
     position: absolute;
     border-radius: 50%;
-    border: 2px solid rgba(34, 197, 94, 0.4);
+    border: 2px solid rgba(0, 200, 255, 0.4);
     animation: scan-expand 2s ease-out infinite;
   }
 
   .bottom-nav {
     @apply fixed bottom-0 left-0 right-0 flex items-center justify-around px-2 py-2;
-    background: rgba(8, 12, 20, 0.95);
+    background: rgba(0, 0, 0, 0.96);
     backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(34, 197, 94, 0.15);
+    border-top: 1px solid rgba(0, 200, 255, 0.12);
     z-index: 50;
   }
 
@@ -201,24 +218,24 @@
   }
 
   .nav-btn.active {
-    color: var(--neon-green);
+    color: var(--neon-blue);
   }
 
   .nav-btn.active svg {
-    filter: drop-shadow(0 0 6px var(--neon-green));
+    filter: drop-shadow(0 0 6px var(--neon-blue));
   }
 
   .progress-bar {
     height: 6px;
     border-radius: 3px;
-    background: rgba(34, 197, 94, 0.15);
+    background: rgba(0, 200, 255, 0.12);
     overflow: hidden;
   }
 
   .progress-fill {
     height: 100%;
     border-radius: 3px;
-    background: linear-gradient(90deg, var(--neon-green), #86efac);
+    background: linear-gradient(90deg, var(--neon-blue), #7ee8fa);
     transition: width 0.5s ease;
   }
 }
@@ -227,12 +244,12 @@
   0%,
   100% {
     box-shadow:
-      0 0 20px rgba(34, 197, 94, 0.4),
+      0 0 20px rgba(0, 200, 255, 0.45),
       inset 0 0 20px rgba(0, 0, 0, 0.3);
   }
   50% {
     box-shadow:
-      0 0 35px rgba(34, 197, 94, 0.7),
+      0 0 40px rgba(0, 200, 255, 0.75),
       inset 0 0 20px rgba(0, 0, 0, 0.3);
   }
 }
@@ -247,12 +264,12 @@
   }
   60% {
     box-shadow:
-      0 0 60px rgba(254, 240, 138, 1),
-      0 0 120px rgba(251, 191, 36, 0.6);
+      0 0 60px rgba(255, 107, 26, 1),
+      0 0 120px rgba(255, 107, 26, 0.5);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+    box-shadow: 0 0 15px rgba(255, 107, 26, 0.3);
   }
 }
 
