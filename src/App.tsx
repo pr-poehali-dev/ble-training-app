@@ -321,19 +321,70 @@ export default function App() {
             <BatteryWidget level={battery} />
           </div>
 
-          <div className="glass-panel" style={{ padding: '18px 16px', borderRadius: 16, marginBottom: 14 }}>
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em', marginBottom: 16, textTransform: 'uppercase' }}>
-              Мишени · тап = откр/закр
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
-              {targets.map(t => (
-                <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
-                  <TargetCircle target={t} onTap={() => toggleTarget(t.id)} />
-                  <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)', fontFamily: 'Roboto Mono', letterSpacing: '0.05em' }}>
-                    {t.status === 'open' ? 'ОТКР' : t.status === 'hit' ? 'ПОПАД' : 'ЗАКР'}
-                  </div>
-                </div>
+          {/* Игровая зона — разметка поля */}
+          <div style={{ position: 'relative', borderRadius: 16, marginBottom: 14, overflow: 'hidden', border: '1.5px solid rgba(255,255,255,0.18)' }}>
+            {/* SVG-разметка поля */}
+            <svg
+              viewBox="0 0 380 180"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+              preserveAspectRatio="none"
+            >
+              {/* Фон поля */}
+              <rect width="380" height="180" fill="#000" />
+              {/* Полосы травы */}
+              {[0,1,2,3,4,5].map(i => (
+                <rect key={i} x={i * 64} y="0" width="32" height="180" fill="rgba(255,255,255,0.025)" />
               ))}
+              {/* Внешняя рамка */}
+              <rect x="8" y="8" width="364" height="164" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" />
+              {/* Центральная линия */}
+              <line x1="190" y1="8" x2="190" y2="172" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" />
+              {/* Центральный круг */}
+              <circle cx="190" cy="90" r="38" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" />
+              {/* Центральная точка */}
+              <circle cx="190" cy="90" r="3" fill="rgba(255,255,255,0.7)" />
+              {/* Левая штрафная */}
+              <rect x="8" y="52" width="52" height="76" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2" />
+              {/* Левая вратарская */}
+              <rect x="8" y="70" width="22" height="40" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+              {/* Левая точка пенальти */}
+              <circle cx="44" cy="90" r="2.5" fill="rgba(255,255,255,0.6)" />
+              {/* Левая дуга штрафной */}
+              <path d="M 60 65 A 30 30 0 0 1 60 115" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+              {/* Правая штрафная */}
+              <rect x="320" y="52" width="52" height="76" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2" />
+              {/* Правая вратарская */}
+              <rect x="350" y="70" width="22" height="40" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+              {/* Правая точка пенальти */}
+              <circle cx="336" cy="90" r="2.5" fill="rgba(255,255,255,0.6)" />
+              {/* Правая дуга штрафной */}
+              <path d="M 320 65 A 30 30 0 0 0 320 115" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+              {/* Угловые дуги */}
+              <path d="M 8 18 A 10 10 0 0 1 18 8" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1" />
+              <path d="M 362 8 A 10 10 0 0 1 372 18" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1" />
+              <path d="M 8 162 A 10 10 0 0 0 18 172" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1" />
+              <path d="M 362 172 A 10 10 0 0 0 372 162" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1" />
+              {/* Голубое свечение центральной линии */}
+              <line x1="190" y1="8" x2="190" y2="172" stroke="rgba(0,200,255,0.12)" strokeWidth="6" />
+              <circle cx="190" cy="90" r="38" fill="none" stroke="rgba(0,200,255,0.1)" strokeWidth="5" />
+            </svg>
+
+            {/* Контент поверх поля */}
+            <div style={{ position: 'relative', zIndex: 2, padding: '16px 16px 14px' }}>
+              <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.1em', marginBottom: 14, textTransform: 'uppercase', textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+                Мишени · тап = откр/закр
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+                {targets.map(t => (
+                  <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+                    <TargetCircle target={t} onTap={() => toggleTarget(t.id)} />
+                    <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.35)', fontFamily: 'Roboto Mono', letterSpacing: '0.05em', textShadow: '0 1px 3px rgba(0,0,0,0.9)' }}>
+                      {t.status === 'open' ? 'ОТКР' : t.status === 'hit' ? 'ПОПАД' : 'ЗАКР'}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
